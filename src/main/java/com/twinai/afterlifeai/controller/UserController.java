@@ -1,10 +1,14 @@
 package com.twinai.afterlifeai.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.twinai.afterlifeai.model.User;
 import com.twinai.afterlifeai.service.UserService;
+
+import jakarta.validation.Valid;
 
 /**
  * REST Controller that handles HTTP requests related to User.
@@ -37,21 +41,20 @@ public class UserController {
      *
      * @return a User object from the service layer
      */
+
     @GetMapping("/user")
-    public User getUser() {
-        return userService.getUser();
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 
     @GetMapping("/user/{id}")
-    // Endpoint to fetch a User object by ID.
-    // @pathvatiable is used to extract the ID from the URL and pass it to the
-    // service layer.
-    public User getUser(@PathVariable int id) {
-        return userService.getUser(id);
+    public User getUserById(@PathVariable Long id) {
+        return userService.getUserById(id);
     }
 
     // Endpoint to search for a name. This demonstrates how to use @RequestParam to
-    //@requestparam is used to extract query parameters from the URL, allowing clients to pass data in the request URL.
+    // @requestparam is used to extract query parameters from the URL, allowing
+    // clients to pass data in the request URL.
     @GetMapping("/search")
     public String search(@RequestParam String name) {
         return "Searching for: " + name;
@@ -65,17 +68,8 @@ public class UserController {
      * @return the created user (simulated)
      */
     @PostMapping("/user")
-    public User createUser(@RequestBody User user) {
+    public User createUser(@Valid @RequestBody User user) {
         return userService.createUser(user);
     }
 
-    /**
-     * Endpoint to return a message from the service layer.
-     *
-     * @return a string message
-     */
-    @GetMapping("/message")
-    public String message() {
-        return userService.getMessage();
-    }
 }
