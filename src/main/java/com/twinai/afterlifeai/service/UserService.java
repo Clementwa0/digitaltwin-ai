@@ -32,6 +32,11 @@ public class UserService {
         return new User("Clement", 22);
     }
 
+    public User getUser(int id) {
+        // In a real application, you would fetch the user from a database using the id
+        return new User("User" + id, 20 + id); // Simulating different users based on id
+    }
+
     /**
      * Accepts a User object and returns it.
      * In a real-world scenario, this method would handle saving the user to a database.

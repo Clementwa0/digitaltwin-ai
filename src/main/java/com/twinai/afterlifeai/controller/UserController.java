@@ -10,7 +10,7 @@ import com.twinai.afterlifeai.service.UserService;
  * REST Controller that handles HTTP requests related to User.
  * 
  * @RestController combines @Controller and @ResponseBody,
- * meaning all methods return data (JSON/XML) instead of views.
+ *                 meaning all methods return data (JSON/XML) instead of views.
  */
 @RestController
 public class UserController {
@@ -40,6 +40,21 @@ public class UserController {
     @GetMapping("/user")
     public User getUser() {
         return userService.getUser();
+    }
+
+    @GetMapping("/user/{id}")
+    // Endpoint to fetch a User object by ID.
+    // @pathvatiable is used to extract the ID from the URL and pass it to the
+    // service layer.
+    public User getUser(@PathVariable int id) {
+        return userService.getUser(id);
+    }
+
+    // Endpoint to search for a name. This demonstrates how to use @RequestParam to
+    //@requestparam is used to extract query parameters from the URL, allowing clients to pass data in the request URL.
+    @GetMapping("/search")
+    public String search(@RequestParam String name) {
+        return "Searching for: " + name;
     }
 
     /**
