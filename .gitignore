@@ -1,10 +1,16 @@
 HELP.md
+
+# Maven
 target/
 .mvn/wrapper/maven-wrapper.jar
+
+# Ignore all target folders except source ones
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### STS ###
+# =========================
+# STS (Spring Tool Suite)
+# =========================
 .apt_generated
 .classpath
 .factorypath
@@ -13,21 +19,44 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
-.idea
+# =========================
+# IntelliJ IDEA
+# =========================
+.idea/
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
+# =========================
+# NetBeans
+# =========================
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
+
+# =========================
+# Gradle (if used)
+# =========================
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
+# =========================
+# VS Code
+# =========================
 .vscode/
+
+# =========================
+# Logs & OS files (recommended to add)
+# =========================
+*.log
+.DS_Store
+Thumbs.db
+
+# =========================
+# Environment / Secrets (IMPORTANT)
+# =========================
+.env
+application-local.properties
