@@ -1,5 +1,6 @@
 package com.twinai.afterlifeai.dto;
 
+import lombok.*;
 /* Why no setters?
     1. Response DTO is immutable → client should not change it.
     2. This is cleaner and safer for APIs.
@@ -8,20 +9,13 @@ package com.twinai.afterlifeai.dto;
   Getters
     1. Needed for JSON serialization (Spring automatically converts to JSON response). */
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class UserResponseDTO {
     private Long id;
     private String name;
     private String email;
 
-    // constructor
-    public UserResponseDTO(Long id, String name, String email){
-        this.id = id;
-        this.name = name;
-        this.email = email;
-    }
-
-    // getters
-    public Long getId() { return id; }
-    public String getName() { return name; }
-    public String getEmail() { return email; }
 }
