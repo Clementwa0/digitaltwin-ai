@@ -1,25 +1,28 @@
 package com.twinai.afterlifeai.model;
 
-
 public class User {
 
-    public User(Long id, String name, int age) {
-    this.id = id;
-    this.name = name;
-    this.age = age;
-}
     private Long id;
-
     private String name;
-    private int age;
+    private String email;
 
+    // Default constructor (required)
     public User() {}
 
+    // Parameterized constructor
+    public User(Long id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
+
+    // Getters
     public Long getId() { return id; }
-
     public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public String getEmail() { return email; }
 
-    public int getAge() { return age; }
-    public void setAge(int age) { this.age = age; }
+    // Setters
+    public void setId(Long id) { this.id = id; }
+    public void setName(String name) { this.name = name; }
+    public void setEmail(String email) { this.email = email; }
 }
