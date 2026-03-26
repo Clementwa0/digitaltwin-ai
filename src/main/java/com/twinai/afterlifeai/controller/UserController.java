@@ -1,75 +1,47 @@
 package com.twinai.afterlifeai.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.twinai.afterlifeai.model.User;
+import com.twinai.afterlifeai.dto.UserRequestDTO;
+import com.twinai.afterlifeai.dto.UserResponseDTO;
 import com.twinai.afterlifeai.service.UserService;
 
+import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
+import java.util.List;
 
-/**
- * REST Controller that handles HTTP requests related to User.
- * 
- * @RestController combines @Controller and @ResponseBody,
- *                 meaning all methods return data (JSON/XML) instead of views.
- */
 @RestController
+
+@RequestMapping("/users")
 public class UserController {
 
-    /**
-     * Injecting the UserService using Spring's dependency injection.
-     * This allows us to use business logic defined in the service layer.
-     */
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    /**
-     * Simple test endpoint to check if the application is running.
-     *
-     * @return a greeting message
-     */
-    @GetMapping("/hello")
-    public String sayHello() {
-        return "Hello, Spring Boot!";
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    /**
-     * Endpoint to fetch a sample User object.
-     *
-     * @return a User object from the service layer
-     */
+    @PostMapping
+    public UserResponseDTO createUser(@Valid @RequestBody UserRequestDTO dto) {
+        return userService.createUser(dto);
+    }
 
-    @GetMapping("/user")
-    public List<User> getAllUsers() {
+
+    @GetMapping
+    public List<UserResponseDTO> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/user/{id}")
-    public User getUserById(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public UserResponseDTO getUser(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
-    // Endpoint to search for a name. This demonstrates how to use @RequestParam to
-    // @requestparam is used to extract query parameters from the URL, allowing
-    // clients to pass data in the request URL.
-    @GetMapping("/search")
-    public String search(@RequestParam String name) {
-        return "Searching for: " + name;
+    @PutMapping("/{id}")
+    public UserResponseDTO updateUser(@PathVariable Long id, @Valid @RequestBody UserRequestDTO dto) {
+        return userService.updateUser(id, dto);
     }
 
-    /**
-     * Endpoint to create a new User.
-     * Accepts a JSON request body and converts it into a User object.
-     *
-     * @param user the user data sent in the request body
-     * @return the created user (simulated)
-     */
-    @PostMapping("/user")
-    public User createUser(@Valid @RequestBody User user) {
-        return userService.createUser(user);
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
     }
-
 }
