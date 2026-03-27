@@ -30,4 +30,5 @@ public class GlobalExceptionHandler {
 
         return new ErrorResponse(message, 400);
     }
+    
 }
